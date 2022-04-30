@@ -15,24 +15,35 @@ struct WelcomeView: View {
         ZStack {
             Color(.red).ignoresSafeArea()
             HStack(alignment: .bottom, spacing: 0) {
-                ZStack {
-                    ShapeView(bezierPath: .letterM, pathBounds: pathBounds)
-                        .trim(from: 0, to: endTrim)
-                        .stroke(Color.black, lineWidth: 2)
-                    ShapeView(bezierPath: .letterM, pathBounds: pathBounds)
-                        .fill(Color.white.opacity(isFilled ? 1 : 0))
+                VStack(alignment: .trailing, spacing: 0) {
+                    Spacer()
+                    ZStack {
+                        ShapeView(bezierPath: .letterM, pathBounds: pathBounds)
+                            .trim(from: 0, to: endTrim)
+                            .stroke(Color.black, lineWidth: 2)
+                            .offset(x: 15)
+                        ShapeView(bezierPath: .letterM, pathBounds: pathBounds)
+                            .fill(Color.white.opacity(isFilled ? 1 : 0))
+                            .offset(x: 15)
+                    }
+                    .frame(width: 150, height: 150)
+                    Spacer()
                 }
-                ZStack {
-                    ShapeView(bezierPath: .letterE, pathBounds: pathBounds)
-                        .trim(from: 0, to: endTrim)
-                        .stroke(Color.black, lineWidth: 2)
-                        .offset(y: 40)
-                    ShapeView(bezierPath: .letterE, pathBounds: pathBounds)
-                        .fill(Color.white.opacity(isFilled ? 1 : 0))
-                        .offset(y: 40)
+                VStack(alignment: .trailing, spacing: 0) {
+                    Spacer()
+                    ZStack {
+                        ShapeView(bezierPath: .letterE, pathBounds: pathBounds)
+                            .trim(from: 0, to: endTrim)
+                            .stroke(Color.black, lineWidth: 2)
+                            .offset(y: 40)
+                        ShapeView(bezierPath: .letterE, pathBounds: pathBounds)
+                            .fill(Color.white.opacity(isFilled ? 1 : 0))
+                            .offset(y: 40)
+                    }
+                    .frame(width: 150, height: 150)
+                    Spacer()
                 }
             }
-            .frame(width: 300, height: 300)
             .offset(x: 30)
             .onAppear {
                 withAnimation(.easeInOut(duration: 2)) {
