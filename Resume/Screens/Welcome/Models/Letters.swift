@@ -7,5 +7,5 @@
 
 struct Letters: Decodable {
     let M: [LetterStep]
-//    let e: Letter
+    let e: [LetterStep]
 }

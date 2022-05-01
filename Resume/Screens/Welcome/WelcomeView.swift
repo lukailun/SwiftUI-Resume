@@ -10,7 +10,7 @@ import SwiftUI
 struct WelcomeView: View {
     @State private var endTrim: CGFloat = 0
     @State private var isFilled = false
-    private let pathBounds = UIBezierPath.calculateBounds(paths: [.letterM, .letterE])
+    private let pathBounds = UIBezierPath.calculateBounds(paths: [.M, .e])
     var body: some View {
         ZStack {
             Color(.red).ignoresSafeArea()
@@ -18,11 +18,11 @@ struct WelcomeView: View {
                 VStack(alignment: .trailing, spacing: 0) {
                     Spacer()
                     ZStack {
-                        ShapeView(bezierPath: .letterM, pathBounds: pathBounds)
+                        ShapeView(bezierPath: .M, pathBounds: pathBounds)
                             .trim(from: 0, to: endTrim)
                             .stroke(Color.black, lineWidth: 2)
                             .offset(x: 15)
-                        ShapeView(bezierPath: .letterM, pathBounds: pathBounds)
+                        ShapeView(bezierPath: .M, pathBounds: pathBounds)
                             .fill(Color.white.opacity(isFilled ? 1 : 0))
                             .offset(x: 15)
                     }
@@ -32,11 +32,11 @@ struct WelcomeView: View {
                 VStack(alignment: .trailing, spacing: 0) {
                     Spacer()
                     ZStack {
-                        ShapeView(bezierPath: .letterE, pathBounds: pathBounds)
+                        ShapeView(bezierPath: .e, pathBounds: pathBounds)
                             .trim(from: 0, to: endTrim)
                             .stroke(Color.black, lineWidth: 2)
                             .offset(y: 40)
-                        ShapeView(bezierPath: .letterE, pathBounds: pathBounds)
+                        ShapeView(bezierPath: .e, pathBounds: pathBounds)
                             .fill(Color.white.opacity(isFilled ? 1 : 0))
                             .offset(y: 40)
                     }
