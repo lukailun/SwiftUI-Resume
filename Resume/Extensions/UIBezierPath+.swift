@@ -25,7 +25,7 @@ extension UIBezierPath {
         M.forEach { bezierPath.handle(withStep: $0) }
         return bezierPath
     }
-    
+
     static var e: UIBezierPath {
         let bezierPath = UIBezierPath()
         guard let letters: Letters = try? DataManager(fileName: "Letters").fetchData() else {
