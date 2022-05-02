@@ -1,5 +1,5 @@
 //
-//  WelcomeView.swift
+//  LaunchView.swift
 //  Resume
 //
 //  Created by 陆凯伦 on 2022/4/30.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
+struct LaunchView: View {
     @State private var endTrim: CGFloat = 0
     @State private var isFilled = false
-    private let pathBounds = UIBezierPath.calculateBounds(paths: [.M, .e])
+    private let pathBounds = UIBezierPath.calculateBounds(paths: [.letters.M, .letters.e])
     var body: some View {
         ZStack {
             Color(.red).ignoresSafeArea()
@@ -18,11 +18,11 @@ struct WelcomeView: View {
                 VStack(alignment: .trailing, spacing: 0) {
                     Spacer()
                     ZStack {
-                        ShapeView(bezierPath: .M, pathBounds: pathBounds)
+                        ShapeView(bezierPath: .letters.M, pathBounds: pathBounds)
                             .trim(from: 0, to: endTrim)
                             .stroke(Color.black, lineWidth: 2)
                             .offset(x: 15)
-                        ShapeView(bezierPath: .M, pathBounds: pathBounds)
+                        ShapeView(bezierPath: .letters.M, pathBounds: pathBounds)
                             .fill(Color.white.opacity(isFilled ? 1 : 0))
                             .offset(x: 15)
                     }
@@ -32,11 +32,11 @@ struct WelcomeView: View {
                 VStack(alignment: .trailing, spacing: 0) {
                     Spacer()
                     ZStack {
-                        ShapeView(bezierPath: .e, pathBounds: pathBounds)
+                        ShapeView(bezierPath: .letters.e, pathBounds: pathBounds)
                             .trim(from: 0, to: endTrim)
                             .stroke(Color.black, lineWidth: 2)
                             .offset(y: 40)
-                        ShapeView(bezierPath: .e, pathBounds: pathBounds)
+                        ShapeView(bezierPath: .letters.e, pathBounds: pathBounds)
                             .fill(Color.white.opacity(isFilled ? 1 : 0))
                             .offset(y: 40)
                     }
@@ -57,8 +57,8 @@ struct WelcomeView: View {
     }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
+struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
+        LaunchView()
     }
 }

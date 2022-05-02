@@ -16,27 +16,18 @@ extension UIBezierPath {
         return path.bounds
     }
 
-    static var M: UIBezierPath {
-        let bezierPath = UIBezierPath()
+    static var letters: (M: UIBezierPath, e: UIBezierPath) {
+        let MPath = UIBezierPath()
+        let ePath = UIBezierPath()
         guard let letters: Letters = try? DataManager(fileName: "Letters").fetchData() else {
-            return bezierPath
+            return (M: MPath, e: ePath)
         }
-        let M = letters.M
-        M.forEach { bezierPath.handle(withStep: $0) }
-        return bezierPath
+        letters.M.forEach { MPath.handle(step: $0) }
+        letters.e.forEach { ePath.handle(step: $0) }
+        return (M: MPath, e: ePath)
     }
 
-    static var e: UIBezierPath {
-        let bezierPath = UIBezierPath()
-        guard let letters: Letters = try? DataManager(fileName: "Letters").fetchData() else {
-            return bezierPath
-        }
-        let e = letters.e
-        e.forEach { bezierPath.handle(withStep: $0) }
-        return bezierPath
-    }
-
-    private func handle(withStep step: LetterStep) {
+    private func handle(step: LetterStep) {
         switch step.key {
         case .point:
             guard let params = step.params else {
