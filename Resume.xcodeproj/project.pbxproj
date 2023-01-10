@@ -73,14 +73,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		5A64C478281E6C0F001846A1 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				5A64C46B281E6082001846A1 /* Letters.json */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		5A64C481281E7BB2001846A1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,7 +149,7 @@
 		5AE2DF3E281D19F00091295E /* Launch */ = {
 			isa = PBXGroup;
 			children = (
-				5A64C478281E6C0F001846A1 /* Data */,
+				5A64C46B281E6082001846A1 /* Letters.json */,
 				5A64C46D281E69C8001846A1 /* Models */,
 				5AE2DF3F281D1A130091295E /* LaunchView.swift */,
 				5AE2DF43281D22980091295E /* ShapeView.swift */,
