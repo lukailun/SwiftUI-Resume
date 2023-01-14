@@ -11,6 +11,7 @@ struct LaunchView: View {
     @State private var endTrim: CGFloat = 0
     @State private var isFilled = false
     private let pathBounds = UIBezierPath.calculateBounds(paths: [.letters.M, .letters.e])
+    
     var body: some View {
         ZStack {
             Color(.red).ignoresSafeArea()
