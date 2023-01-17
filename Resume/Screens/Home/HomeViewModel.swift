@@ -9,8 +9,9 @@ import Foundation
 import Combine
 
 class HomeViewModel: ObservableObject {
-    @Published private(set) var contents: [String] = []
     @Published private(set) var index = 0
+    
+    private var contents: [String] = []
     private var cancellables: Set<AnyCancellable> = []
     
     private var sharedPublisher: Publishers.Share<Published<Int>.Publisher> {
