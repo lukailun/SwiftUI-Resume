@@ -31,7 +31,7 @@ struct HomeView: View {
                     HStack {
                         Spacer()
                         Button {
-                            print("haha")
+                            print("arrow_clockwise")
                         } label: {
                             Image("arrow_clockwise")
                                 .resizable()
@@ -40,7 +40,7 @@ struct HomeView: View {
                         }
                         Spacer().frame(width: 12)
                         Button {
-                            print("haha")
+                            print("caret_left")
                         } label: {
                             Image("caret_left")
                                 .resizable()
@@ -50,7 +50,7 @@ struct HomeView: View {
                         .disabled(false)
                         Spacer().frame(width: 12)
                         Button {
-                            print("haha")
+                            print("caret_right")
                         } label: {
                             Image("caret_right")
                                 .resizable()
