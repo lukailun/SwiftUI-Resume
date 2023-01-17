@@ -14,6 +14,7 @@ struct HomeView: View {
                 LinearGradient(colors: [.blue, .red, .pink],
                                startPoint: .leading,
                                endPoint: .bottom)
+                .ignoresSafeArea()
                 VStack {
                     Spacer()
                     HStack {
@@ -21,21 +22,47 @@ struct HomeView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 200)
+                        Spacer()
                     }
                 }
-            }
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
+                .ignoresSafeArea()
+                VStack {
+                    Spacer()
                     HStack {
-//                        Spacer()
-                        Image("arrow_clockwise")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 30)
+                        Spacer()
+                        Button {
+                            print("haha")
+                        } label: {
+                            Image("arrow_clockwise")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 30)
+                        }
+                        Spacer().frame(width: 12)
+                        Button {
+                            print("haha")
+                        } label: {
+                            Image("caret_left")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 30)
+                        }
+                        .disabled(false)
+                        Spacer().frame(width: 12)
+                        Button {
+                            print("haha")
+                        } label: {
+                            Image("caret_right")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 30)
+                        }
+                        .disabled(false)
+                        Spacer().frame(width: 12)
                     }
+                    Spacer().frame(height: 10)
                 }
             }
-            .ignoresSafeArea()
         }
     }
 }
