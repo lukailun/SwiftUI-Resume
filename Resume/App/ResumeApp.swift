@@ -17,7 +17,8 @@ struct ResumeApp: App {
                 LaunchView()
                     .transition(.opacity.animation(.easeInOut(duration: 2)))
             } else {
-                Text("111")
+                HomeView()
+                    .transition(.opacity.animation(.easeInOut(duration: 2)))
             }
         }
     }
