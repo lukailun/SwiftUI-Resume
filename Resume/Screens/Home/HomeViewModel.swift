@@ -10,19 +10,19 @@ import Combine
 
 class HomeViewModel: ObservableObject {
     @Published private(set) var contents: [String] = []
-    private let bioSubject = CurrentValueSubject<Int, Never>(0)
+    @Published private(set) var index = 0
     private var cancellables = Set<AnyCancellable>()
     
-    private var sharedPublisher: Publishers.Share<CurrentValueSubject<Int, Never>> {
-        bioSubject.share()
+    private var sharedPublisher: Publishers.Share<Published<Int>.Publisher> {
+        $index.share()
     }
     
     var isPreviousEnabled: Bool {
-        bioSubject.value > 0
+        index > 0
     }
     
     var isNextEnabled: Bool {
-        bioSubject.value < contents.count - 1
+        index < contents.count - 1
     }
     
     init() {
@@ -66,17 +66,17 @@ extension HomeViewModel {
         guard isNextEnabled else {
             return
         }
-        bioSubject.send(bioSubject.value + 1)
+        index += 1
     }
     
     func previous() {
         guard isPreviousEnabled else {
             return
         }
-        bioSubject.send(bioSubject.value - 1)
+        index -= 1
     }
     
     func refresh() {
-        bioSubject.send(0)
+        index = 0
     }
 }
