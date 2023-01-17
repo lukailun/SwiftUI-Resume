@@ -30,40 +30,37 @@ struct HomeView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        Button {
+                        ToolbarButton(imageName: "arrow_clockwise") {
                             print("arrow_clockwise")
-                        } label: {
-                            Image("arrow_clockwise")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 30)
                         }
                         Spacer().frame(width: 12)
-                        Button {
+                        ToolbarButton(imageName: "caret_left", disabled: false) {
                             print("caret_left")
-                        } label: {
-                            Image("caret_left")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 30)
                         }
-                        .disabled(false)
                         Spacer().frame(width: 12)
-                        Button {
+                        ToolbarButton(imageName: "caret_right", disabled: false) {
                             print("caret_right")
-                        } label: {
-                            Image("caret_right")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 30)
                         }
-                        .disabled(false)
                         Spacer().frame(width: 12)
                     }
                     Spacer().frame(height: 10)
                 }
             }
         }
+    }
+}
+
+extension HomeView {
+    private func ToolbarButton(imageName: String, disabled: Bool? = nil, action: @escaping () -> Void) -> some View {
+        Button {
+            action()
+        } label: {
+            Image(imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 30)
+        }
+        .disabled(disabled ?? false)
     }
 }
 
