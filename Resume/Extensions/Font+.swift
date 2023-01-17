@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Font {
-    static func muyaoFont(size: CGFloat, relativeTo textStyle: Font.TextStyle) -> Font {
-        .custom("Muyao-Softbrush", size: size, relativeTo: textStyle)
+    static func muyaoFont(size: CGFloat = 21) -> Font {
+        .custom("Muyao-Softbrush", size: size)
     }
 }

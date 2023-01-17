@@ -25,6 +25,8 @@ struct HomeView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 200)
                         Spacer()
+                       BubbleView()
+                            .environmentObject(viewModel)
                     }
                 }
                 .ignoresSafeArea()

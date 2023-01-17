@@ -9,13 +9,20 @@ import Foundation
 import Combine
 
 class HomeViewModel: ObservableObject {
-    @Published private(set) var index = 0
-    
+    @Published private var index = 0
+    @Published private(set) var style = DialogueStyle.single
     private var contents: [String] = []
     private var cancellables: Set<AnyCancellable> = []
     
     private var sharedPublisher: Publishers.Share<Published<Int>.Publisher> {
         $index.share()
+    }
+    
+    var content: String {
+        if contents.isEmpty, index >= contents.count {
+            return ""
+        }
+        return contents[index]
     }
     
     var isPreviousEnabled: Bool {
@@ -28,10 +35,6 @@ class HomeViewModel: ObservableObject {
     
     init() {
         fetchContents()
-        if contents.isEmpty {
-            return
-        }
-        setupContentsSubscription()
     }
     
     private func fetchContents() {
@@ -39,26 +42,6 @@ class HomeViewModel: ObservableObject {
             return
         }
         self.contents = contents
-    }
-    
-    private func setupContentsSubscription() {
-        sharedPublisher
-            .map { [unowned self] in self.contents[$0] }
-            .receive(on: RunLoop.main)
-            .sink { content in
-                print(content)
-//                withAnimation(.easeInOut) {
-//                    if chString.contains(",") {
-//                        self?.multipleText.removeAll()
-//                        self?.splitTextSubject.send(chString.components(separatedBy: ","))
-//                        self?.style = .double
-//                    } else {
-//                        self?.singleText = chString
-//                        self?.style = .single
-//                    }
-//                }
-            }
-            .store(in: &cancellables)
     }
 }
 
