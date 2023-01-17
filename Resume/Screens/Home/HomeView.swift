@@ -61,6 +61,7 @@ extension HomeView {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 30)
+                .opacity((enabled ?? true) ? 1 : 0.5)
         }
         .disabled(!(enabled ?? true))
     }
