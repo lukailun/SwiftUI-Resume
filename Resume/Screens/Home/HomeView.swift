@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var viewModel = HomeViewModel()
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -31,15 +33,15 @@ struct HomeView: View {
                     HStack {
                         Spacer()
                         ToolbarButton(imageName: "arrow_clockwise") {
-                            print("arrow_clockwise")
+                            viewModel.refresh()
                         }
                         Spacer().frame(width: 12)
-                        ToolbarButton(imageName: "caret_left", disabled: false) {
-                            print("caret_left")
+                        ToolbarButton(imageName: "caret_left", enabled: viewModel.isPreviousEnabled) {
+                            viewModel.previous()
                         }
                         Spacer().frame(width: 12)
-                        ToolbarButton(imageName: "caret_right", disabled: false) {
-                            print("caret_right")
+                        ToolbarButton(imageName: "caret_right", enabled: viewModel.isNextEnabled) {
+                            viewModel.next()
                         }
                         Spacer().frame(width: 12)
                     }
@@ -51,7 +53,7 @@ struct HomeView: View {
 }
 
 extension HomeView {
-    private func ToolbarButton(imageName: String, disabled: Bool? = nil, action: @escaping () -> Void) -> some View {
+    private func ToolbarButton(imageName: String, enabled: Bool? = nil, action: @escaping () -> Void) -> some View {
         Button {
             action()
         } label: {
@@ -60,7 +62,7 @@ extension HomeView {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 30)
         }
-        .disabled(disabled ?? false)
+        .disabled(!(enabled ?? true))
     }
 }
 
