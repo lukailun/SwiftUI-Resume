@@ -25,6 +25,7 @@
 		5A8F99242972A35800EBCCDA /* ResumeAppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F99232972A35800EBCCDA /* ResumeAppViewModel.swift */; };
 		5A9CB21F29767D910064D916 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9CB21E29767D910064D916 /* HomeView.swift */; };
 		5A9CB22229767DF40064D916 /* DialogueStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9CB22129767DF40064D916 /* DialogueStyle.swift */; };
+		5A9CB227297698F60064D916 /* Bio.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A9CB226297698F50064D916 /* Bio.json */; };
 		5AE2DF40281D1A130091295E /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE2DF3F281D1A130091295E /* LaunchView.swift */; };
 		5AE2DF42281D1A520091295E /* UIBezierPath+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE2DF41281D1A520091295E /* UIBezierPath+.swift */; };
 		5AE2DF44281D22980091295E /* ShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE2DF43281D22980091295E /* ShapeView.swift */; };
@@ -51,6 +52,7 @@
 		5A8F99232972A35800EBCCDA /* ResumeAppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeAppViewModel.swift; sourceTree = "<group>"; };
 		5A9CB21E29767D910064D916 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5A9CB22129767DF40064D916 /* DialogueStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogueStyle.swift; sourceTree = "<group>"; };
+		5A9CB226297698F50064D916 /* Bio.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Bio.json; sourceTree = "<group>"; };
 		5AE2DF3F281D1A130091295E /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		5AE2DF41281D1A520091295E /* UIBezierPath+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+.swift"; sourceTree = "<group>"; };
 		5AE2DF43281D22980091295E /* ShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeView.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		5A9CB223297694CD0064D916 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5A9CB226297698F50064D916 /* Bio.json */,
 				5A742E4E281CF0B7006FC71B /* Muyao-Softbrush.ttf */,
 				5A64C46B281E6082001846A1 /* Letters.json */,
 			);
@@ -262,6 +265,7 @@
 				5A713DBE281C279700D8DEB1 /* Assets.xcassets in Resources */,
 				5A742E4F281CF0B7006FC71B /* Muyao-Softbrush.ttf in Resources */,
 				5A64C46C281E6082001846A1 /* Letters.json in Resources */,
+				5A9CB227297698F60064D916 /* Bio.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
