@@ -14,7 +14,7 @@ class HomeViewModel: ObservableObject {
     private var contents: [String] = []
     
     var content: String {
-        if contents.isEmpty, index >= contents.count {
+        if contents.isEmpty || index >= contents.count {
             return ""
         }
         return contents[index]
