@@ -62,7 +62,7 @@ extension HomeView {
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 30)
+                .frame(width: 30, height: 30)
                 .opacity(enabled ? 1 : 0.5)
         }
         .disabled(!enabled)
