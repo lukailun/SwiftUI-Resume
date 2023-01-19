@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 class HomeViewModel: ObservableObject {
+    private let dataManager: DataManager
     @Published private var index = 0
     @Published private(set) var style = DialogueStyle.single
     private var contents: [String] = []
@@ -28,12 +29,13 @@ class HomeViewModel: ObservableObject {
         index < contents.count - 1
     }
     
-    init() {
+    init(dataManager: DataManager) {
+        self.dataManager = dataManager
         fetchContents()
     }
     
     private func fetchContents() {
-        guard let contents: [String] = try? DataManager(fileName: "Bio").fetchData() else {
+        guard let contents: [String] = try? dataManager.fetchData() else {
             return
         }
         self.contents = contents

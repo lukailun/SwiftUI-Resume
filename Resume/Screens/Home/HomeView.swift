@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var viewModel = HomeViewModel()
+    @StateObject private var viewModel = HomeViewModel(dataManager: DataManager(fileName: "Bio"))
     
     var body: some View {
         NavigationView {
