@@ -12,11 +12,6 @@ class HomeViewModel: ObservableObject {
     @Published private var index = 0
     @Published private(set) var style = DialogueStyle.single
     private var contents: [String] = []
-    private var cancellables: Set<AnyCancellable> = []
-    
-    private var sharedPublisher: Publishers.Share<Published<Int>.Publisher> {
-        $index.share()
-    }
     
     var content: String {
         if contents.isEmpty, index >= contents.count {
@@ -60,7 +55,7 @@ extension HomeViewModel {
         index -= 1
     }
     
-    func refresh() {
+    func reset() {
         index = 0
     }
 }

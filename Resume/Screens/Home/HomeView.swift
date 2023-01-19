@@ -35,7 +35,7 @@ struct HomeView: View {
                     HStack {
                         Spacer()
                         ToolbarButton(imageName: "arrow_clockwise") {
-                            viewModel.refresh()
+                            viewModel.reset()
                         }
                         Spacer().frame(width: 12)
                         ToolbarButton(imageName: "caret_left", enabled: viewModel.isPreviousEnabled) {
@@ -55,7 +55,7 @@ struct HomeView: View {
 }
 
 extension HomeView {
-    private func ToolbarButton(imageName: String, enabled: Bool? = nil, action: @escaping () -> Void) -> some View {
+    private func ToolbarButton(imageName: String, enabled: Bool = true, action: @escaping () -> Void) -> some View {
         Button {
             action()
         } label: {
@@ -63,9 +63,9 @@ extension HomeView {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 30)
-                .opacity((enabled ?? true) ? 1 : 0.5)
+                .opacity(enabled ? 1 : 0.5)
         }
-        .disabled(!(enabled ?? true))
+        .disabled(!enabled)
     }
 }
 
