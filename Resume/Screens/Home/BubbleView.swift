@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BubbleView: View {
     @EnvironmentObject var viewModel: HomeViewModel
-    
+
     var body: some View {
         Group {
             switch viewModel.style {
@@ -30,7 +30,6 @@ struct BubbleView: View {
         }
         .frame(width: 200)
         .offset(x: -30, y: -120)
-        
     }
 }
 

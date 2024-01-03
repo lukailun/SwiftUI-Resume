@@ -9,23 +9,23 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel(dataManager: DataManager(fileName: "Bio"))
-    
+
     var body: some View {
         NavigationView {
             ZStack {
                 LinearGradient(colors: [.blue, .red, .pink],
                                startPoint: .leading,
                                endPoint: .bottom)
-                .ignoresSafeArea()
+                    .ignoresSafeArea()
                 VStack {
                     Spacer()
                     HStack {
-                      Image("me")
+                        Image("me")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 200)
                         Spacer()
-                       BubbleView()
+                        BubbleView()
                             .environmentObject(viewModel)
                     }
                 }

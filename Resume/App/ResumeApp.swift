@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct ResumeApp: App {
     @StateObject var viewModel = ResumeAppViewModel()
-    
+
     var body: some Scene {
         WindowGroup {
             if viewModel.isLaunching {

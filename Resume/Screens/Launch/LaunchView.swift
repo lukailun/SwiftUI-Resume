@@ -11,7 +11,7 @@ struct LaunchView: View {
     @State private var endTrim: CGFloat = 0
     @State private var isFilled = false
     private let pathBounds = UIBezierPath.calculateBounds(paths: [.letters.M, .letters.e])
-    
+
     var body: some View {
         ZStack {
             Color(.red).ignoresSafeArea()
@@ -19,11 +19,11 @@ struct LaunchView: View {
                 VStack(alignment: .trailing, spacing: 0) {
                     Spacer()
                     ZStack {
-                        ShapeView(bezierPath: .letters.M, pathBounds: pathBounds)
+                        ShapeView(path: Path(UIBezierPath.letters.M.cgPath), pathBounds: pathBounds)
                             .trim(from: 0, to: endTrim)
                             .stroke(Color.black, lineWidth: 2)
                             .offset(x: 15)
-                        ShapeView(bezierPath: .letters.M, pathBounds: pathBounds)
+                        ShapeView(path: Path(UIBezierPath.letters.M.cgPath), pathBounds: pathBounds)
                             .fill(Color.white.opacity(isFilled ? 1 : 0))
                             .offset(x: 15)
                     }
@@ -33,11 +33,11 @@ struct LaunchView: View {
                 VStack(alignment: .trailing, spacing: 0) {
                     Spacer()
                     ZStack {
-                        ShapeView(bezierPath: .letters.e, pathBounds: pathBounds)
+                        ShapeView(path: Path(UIBezierPath.letters.e.cgPath), pathBounds: pathBounds)
                             .trim(from: 0, to: endTrim)
                             .stroke(Color.black, lineWidth: 2)
                             .offset(y: 40)
-                        ShapeView(bezierPath: .letters.e, pathBounds: pathBounds)
+                        ShapeView(path: Path(UIBezierPath.letters.e.cgPath), pathBounds: pathBounds)
                             .fill(Color.white.opacity(isFilled ? 1 : 0))
                             .offset(y: 40)
                     }
