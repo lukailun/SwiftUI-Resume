@@ -16,10 +16,10 @@ struct BubbleView: View {
             case .none:
                 Spacer()
             case .single:
-                Image("single")
+                Image("bubble/single")
                     .resizable()
             case .double:
-                Image("double")
+                Image("bubble/double")
                     .resizable()
             }
         }
