@@ -12,6 +12,14 @@ class HomeViewModel: ObservableObject {
     private let dataManager: DataManager
     @Published private var index = 0
     @Published private(set) var style = DialogueStyle.single
+    @Published private(set) var isBackgroundImageChanging = false
+    @Published private(set) var backgroundImage = "backgroundImage/2" {
+        didSet {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.isBackgroundImageChanging = true
+            }
+        }
+    }
     private var contents: [String] = []
 
     var content: String {

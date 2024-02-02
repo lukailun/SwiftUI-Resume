@@ -17,6 +17,8 @@ struct HomeView: View {
                                startPoint: .leading,
                                endPoint: .bottom)
                     .ignoresSafeArea()
+                BackgroundImage()
+                    .ignoresSafeArea()
                 VStack {
                     Spacer()
                     HStack {
@@ -66,6 +68,22 @@ extension HomeView {
                 .opacity(enabled ? 1 : 0.5)
         }
         .disabled(!enabled)
+    }
+    
+    private func BackgroundImage() -> some View {
+        VStack {
+            if !viewModel.isBackgroundImageChanging, !viewModel.backgroundImage.isEmpty {
+                Image(viewModel.backgroundImage)
+                    .resizable()
+                    .scaleEffect(1.2, anchor: .top)
+                    .aspectRatio(nil, contentMode: .fit)
+                    .transition(AnyTransition.opacity.animation(.easeInOut(duration: 1.2)))
+            } else {
+                EmptyView()
+                    .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.2)))
+            }
+            Spacer()
+        }
     }
 }
 
