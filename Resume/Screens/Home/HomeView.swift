@@ -72,15 +72,13 @@ extension HomeView {
     
     private func BackgroundImage() -> some View {
         VStack {
-            if !viewModel.isBackgroundImageChanging, !viewModel.backgroundImage.isEmpty {
-                Image(viewModel.backgroundImage)
+            if !viewModel.isBackgroundImageChanging, !viewModel.backgroundImageName.isEmpty {
+                Image(viewModel.backgroundImageName)
                     .resizable()
-                    .scaleEffect(1.2, anchor: .top)
-                    .aspectRatio(nil, contentMode: .fit)
-                    .transition(AnyTransition.opacity.animation(.easeInOut(duration: 1.2)))
+                    .scaleEffect(1.25, anchor: .top)
+                    .scaledToFit()
             } else {
                 EmptyView()
-                    .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.2)))
             }
             Spacer()
         }

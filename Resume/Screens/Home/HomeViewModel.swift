@@ -10,31 +10,33 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     private let dataManager: DataManager
-    @Published private var index = 0
+    @Published private var contentIndex = 0
+    @Published private var backgroundImageIndex = 0
     @Published private(set) var style = DialogueStyle.single
     @Published private(set) var isBackgroundImageChanging = false
-    @Published private(set) var backgroundImage = "backgroundImage/6" {
-        didSet {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.isBackgroundImageChanging = true
-            }
-        }
-    }
+    
     private var contents: [String] = []
 
     var content: String {
-        if contents.isEmpty || index >= contents.count {
+        if contents.isEmpty || contentIndex >= contents.count {
             return ""
         }
-        return contents[index]
+        return contents[contentIndex]
+    }
+    
+    var backgroundImageName: String {
+        if contents.isEmpty || contentIndex >= contents.count {
+            return ""
+        }
+        return "backgroundImage/\(backgroundImageIndex)"
     }
 
     var isPreviousEnabled: Bool {
-        index > 0
+        contentIndex > 0
     }
 
     var isNextEnabled: Bool {
-        index < contents.count - 1
+        contentIndex < contents.count - 1
     }
 
     init(dataManager: DataManager) {
@@ -55,17 +57,20 @@ extension HomeViewModel {
         guard isNextEnabled else {
             return
         }
-        index += 1
+        contentIndex += 1
+        backgroundImageIndex += 1
     }
 
     func previous() {
         guard isPreviousEnabled else {
             return
         }
-        index -= 1
+        contentIndex -= 1
+        backgroundImageIndex -= 1
     }
 
     func reset() {
-        index = 0
+        contentIndex = 0
+        backgroundImageIndex = 0
     }
 }
