@@ -13,7 +13,7 @@ class HomeViewModel: ObservableObject {
     @Published private var index = 0
     @Published private(set) var style = DialogueStyle.single
     @Published private(set) var isBackgroundImageChanging = false
-    @Published private(set) var backgroundImage = "backgroundImage/2" {
+    @Published private(set) var backgroundImage = "backgroundImage/6" {
         didSet {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.isBackgroundImageChanging = true
