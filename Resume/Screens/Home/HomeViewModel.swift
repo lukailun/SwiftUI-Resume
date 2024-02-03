@@ -10,8 +10,8 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     private let dataManager: DataManager
+    private let backgroundImageCount = 7
     @Published private var contentIndex = 0
-    @Published private var backgroundImageIndex = 0
     @Published private(set) var style = DialogueStyle.single
     @Published private(set) var isBackgroundImageChanging = false
     
@@ -28,6 +28,7 @@ class HomeViewModel: ObservableObject {
         if contents.isEmpty || contentIndex >= contents.count {
             return ""
         }
+        let backgroundImageIndex = contentIndex / Int(ceil(Double(contents.count) / Double(backgroundImageCount)))
         return "backgroundImage/\(backgroundImageIndex)"
     }
 
@@ -58,7 +59,6 @@ extension HomeViewModel {
             return
         }
         contentIndex += 1
-        backgroundImageIndex += 1
     }
 
     func previous() {
@@ -66,11 +66,9 @@ extension HomeViewModel {
             return
         }
         contentIndex -= 1
-        backgroundImageIndex -= 1
     }
 
     func reset() {
         contentIndex = 0
-        backgroundImageIndex = 0
     }
 }
