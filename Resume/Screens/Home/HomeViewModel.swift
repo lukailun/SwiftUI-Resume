@@ -24,22 +24,6 @@ class HomeViewModel: ObservableObject {
     private var sharePublisher: Publishers.Share<CurrentValueSubject<Int, Never>> {
         bioIndexSubject.share()
     }
-    
-//    var backgroundImageName: String {
-//        if contents.isEmpty || bioIndexSubject.value >= contents.count {
-//            return ""
-//        }
-//        let backgroundImageIndex = bioIndexSubject.value / Int(ceil(Double(contents.count) / Double(backgroundImageCount)))
-//        return "backgroundImage/\(backgroundImageIndex)"
-//    }
-
-    var isPreviousEnabled: Bool {
-        bioIndexSubject.value > 0
-    }
-
-    var isNextEnabled: Bool {
-        bioIndexSubject.value < contents.count - 1
-    }
 
     init(dataManager: DataManager) {
         self.dataManager = dataManager
@@ -77,6 +61,14 @@ class HomeViewModel: ObservableObject {
 }
 
 extension HomeViewModel {
+    var isPreviousEnabled: Bool {
+        bioIndexSubject.value > 0
+    }
+
+    var isNextEnabled: Bool {
+        bioIndexSubject.value < contents.count - 1
+    }
+    
     func next() {
         guard isNextEnabled else {
             return
