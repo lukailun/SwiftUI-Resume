@@ -76,7 +76,7 @@ extension HomeView {
         }
         .disabled(!enabled)
     }
-    
+
     private func BackgroundImage() -> some View {
         VStack {
             if !viewModel.backgroundImageName.isEmpty {
