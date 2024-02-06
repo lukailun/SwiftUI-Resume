@@ -11,38 +11,41 @@ import Foundation
 class HomeViewModel: ObservableObject {
     private let dataManager: DataManager
     private let backgroundImageCount = 7
-    @Published private var contentIndex = 0
-    @Published private(set) var style = DialogueStyle.single
-    @Published private(set) var isBackgroundImageChanging = false
+    private let bioIndexSubject = CurrentValueSubject<Int, Never>(0)
+    private var cancellables = Set<AnyCancellable>()
+    
+    @Published private(set) var content = ""
+    @Published private(set) var backgroundImageName = ""
+    @Published private(set) var style = BubbleStyle.single
+    @Published private(set) var width = 260
     
     private var contents: [String] = []
-
-    var content: String {
-        if contents.isEmpty || contentIndex >= contents.count {
-            return ""
-        }
-        return contents[contentIndex]
+    
+    private var sharePublisher: Publishers.Share<CurrentValueSubject<Int, Never>> {
+        bioIndexSubject.share()
     }
     
-    var backgroundImageName: String {
-        if contents.isEmpty || contentIndex >= contents.count {
-            return ""
-        }
-        let backgroundImageIndex = contentIndex / Int(ceil(Double(contents.count) / Double(backgroundImageCount)))
-        return "backgroundImage/\(backgroundImageIndex)"
-    }
+//    var backgroundImageName: String {
+//        if contents.isEmpty || bioIndexSubject.value >= contents.count {
+//            return ""
+//        }
+//        let backgroundImageIndex = bioIndexSubject.value / Int(ceil(Double(contents.count) / Double(backgroundImageCount)))
+//        return "backgroundImage/\(backgroundImageIndex)"
+//    }
 
     var isPreviousEnabled: Bool {
-        contentIndex > 0
+        bioIndexSubject.value > 0
     }
 
     var isNextEnabled: Bool {
-        contentIndex < contents.count - 1
+        bioIndexSubject.value < contents.count - 1
     }
 
     init(dataManager: DataManager) {
         self.dataManager = dataManager
         fetchContents()
+        addContentSubscription()
+        addBackgroundImageSubscription()
     }
 
     private func fetchContents() {
@@ -51,6 +54,26 @@ class HomeViewModel: ObservableObject {
         }
         self.contents = contents
     }
+    
+    private func addContentSubscription() {
+        sharePublisher
+            .map { [contents] index in contents[index] }
+            .receive(on: RunLoop.main)
+            .sink { [weak self] content in
+                self?.content = content
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func addBackgroundImageSubscription() {
+        sharePublisher
+            .map { [contents, backgroundImageCount] index in index / Int(ceil(Double(contents.count) / Double(backgroundImageCount))) }
+            .receive(on: RunLoop.main)
+            .sink { [weak self] backgroundImageIndex in
+                self?.backgroundImageName = "backgroundImage/\(backgroundImageIndex)"
+            }
+            .store(in: &cancellables)
+    }
 }
 
 extension HomeViewModel {
@@ -58,17 +81,17 @@ extension HomeViewModel {
         guard isNextEnabled else {
             return
         }
-        contentIndex += 1
+        bioIndexSubject.send(bioIndexSubject.value + 1)
     }
 
     func previous() {
         guard isPreviousEnabled else {
             return
         }
-        contentIndex -= 1
+        bioIndexSubject.send(bioIndexSubject.value - 1)
     }
 
     func reset() {
-        contentIndex = 0
+        bioIndexSubject.send(0)
     }
 }

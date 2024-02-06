@@ -1,11 +1,11 @@
 //
-//  DialogueStyle.swift
+//  BubbleStyle.swift
 //  Resume
 //
 //  Created by lukailun on 2023/1/17.
 //
 
-enum DialogueStyle {
+enum BubbleStyle {
     case none
     case single
     case double
