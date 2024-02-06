@@ -17,7 +17,7 @@ class HomeViewModel: ObservableObject {
     
     @Published private(set) var content = ""
     @Published private(set) var backgroundImageName = ""
-    @Published private(set) var style = BubbleStyle.single
+    @Published private(set) var bubbleStyle = BubbleStyle.none
     @Published private(set) var bubbleWidth: CGFloat = 260
     
     private var contents: [String] = []
@@ -46,6 +46,7 @@ class HomeViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .sink { [weak self] content in
                 self?.content = content
+                self?.updateBubbleStyle(content: content)
                 self?.updateBubbleWidth(content: content)
             }
             .store(in: &cancellables)
@@ -62,6 +63,11 @@ class HomeViewModel: ObservableObject {
     }
     
     private func updateBubbleWidth(content: String) {
+        if bubbleStyle == .double {
+            return withAnimation(.spring()) {
+                bubbleWidth = 260
+            }
+        }
         switch content.count {
         case 0:
             withAnimation(.spring()) {
@@ -79,6 +85,15 @@ class HomeViewModel: ObservableObject {
             withAnimation(.spring()) {
                 bubbleWidth = 260
             }
+        }
+    }
+    
+    private func updateBubbleStyle(content: String) {
+        switch content.count {
+        case 0:
+            bubbleStyle = .none
+        default:
+            bubbleStyle = content.contains("，") ? .double : .single
         }
     }
 }
