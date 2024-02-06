@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     private let dataManager: DataManager
@@ -17,7 +18,7 @@ class HomeViewModel: ObservableObject {
     @Published private(set) var content = ""
     @Published private(set) var backgroundImageName = ""
     @Published private(set) var style = BubbleStyle.single
-    @Published private(set) var width = 260
+    @Published private(set) var bubbleWidth: CGFloat = 260
     
     private var contents: [String] = []
     
@@ -45,6 +46,7 @@ class HomeViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .sink { [weak self] content in
                 self?.content = content
+                self?.updateBubbleWidth(content: content)
             }
             .store(in: &cancellables)
     }
@@ -57,6 +59,27 @@ class HomeViewModel: ObservableObject {
                 self?.backgroundImageName = "backgroundImage/\(backgroundImageIndex)"
             }
             .store(in: &cancellables)
+    }
+    
+    private func updateBubbleWidth(content: String) {
+        switch content.count {
+        case 0:
+            withAnimation(.spring()) {
+                bubbleWidth = 0
+            }
+        case 1...10:
+            withAnimation(.spring()) {
+                bubbleWidth = 200
+            }
+        case 11...13:
+            withAnimation(.spring()) {
+                bubbleWidth = 260
+            }
+        default:
+            withAnimation(.spring()) {
+                bubbleWidth = 260
+            }
+        }
     }
 }
 

@@ -18,18 +18,22 @@ struct BubbleView: View {
             case .single:
                 Image("bubble/single")
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: viewModel.bubbleWidth)
             case .double:
                 Image("bubble/double")
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
             }
         }
-        .aspectRatio(contentMode: .fit)
+        .frame(width: viewModel.bubbleWidth)
         .overlay {
             Text(viewModel.content)
                 .font(Font.muyaoFont())
+                .padding(.horizontal, 20)
         }
-        .frame(width: 200)
-        .offset(x: -30, y: -120)
+        .offset(y: -120)
+        .frame(width: 300, height: 300)
     }
 }
 
