@@ -76,5 +76,6 @@ extension BubbleView {
 struct BubbleView_Previews: PreviewProvider {
     static var previews: some View {
         BubbleView()
+            .environmentObject(HomeViewModel(dataManager: DataManager(fileName: "Bio")))
     }
 }
