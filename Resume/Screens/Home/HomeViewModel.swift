@@ -15,7 +15,7 @@ class HomeViewModel: ObservableObject {
     private let bioIndexSubject = CurrentValueSubject<Int, Never>(0)
     private var cancellables = Set<AnyCancellable>()
 
-    @Published private(set) var content = ""
+    @Published private(set) var content: [AttributedString] = []
     @Published private(set) var backgroundImageName = ""
     @Published private(set) var bubbleStyle = BubbleStyle.none
     @Published private(set) var bubbleWidth: CGFloat = 260
@@ -45,7 +45,9 @@ class HomeViewModel: ObservableObject {
             .map { [contents] index in contents[index] }
             .receive(on: RunLoop.main)
             .sink { [weak self] content in
-                self?.content = content
+                self?.content = content.split(separator: "，")
+                    .map { [weak self] value in self?.addTextLimitInDoubleBubble(content: String(value)) ?? "" }
+                    .map { [weak self] value in self?.colorizeDigitsAndLetters(content: value) ?? "" }
                 self?.updateBubbleStyle(content: content)
                 self?.updateBubbleWidth(content: content)
             }
@@ -77,10 +79,6 @@ class HomeViewModel: ObservableObject {
             withAnimation(.spring()) {
                 bubbleWidth = 200
             }
-        case 11 ... 13:
-            withAnimation(.spring()) {
-                bubbleWidth = 260
-            }
         default:
             withAnimation(.spring()) {
                 bubbleWidth = 260
@@ -95,6 +93,33 @@ class HomeViewModel: ObservableObject {
         default:
             bubbleStyle = content.contains("，") ? .double : .single
         }
+    }
+    
+    private func addTextLimitInDoubleBubble(content: String) -> String {
+        guard content.contains("，"), content.count > 8 else {
+            return content
+        }
+        var value = content
+        let index = value.index(value.startIndex, offsetBy: 8)
+        value.insert("\n", at: index)
+        return value
+    }
+    
+    private func colorizeDigitsAndLetters(content: String) -> AttributedString {
+        let attributedString = NSMutableAttributedString(string: content)
+        let fullRange = NSRange(location: 0, length: content.count)
+        let redColor = UIColor.red
+            let redAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor: redColor]
+        do {
+                let regex = try NSRegularExpression(pattern: "[0-9a-zA-Z]", options: [])
+                let matches = regex.matches(in: content, options: [], range: fullRange)
+                for match in matches {
+                    attributedString.addAttributes(redAttributes, range: match.range)
+                }
+            } catch {
+                return AttributedString(attributedString)
+            }
+        return AttributedString(attributedString)
     }
 }
 

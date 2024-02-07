@@ -42,34 +42,23 @@ extension BubbleView {
             case .none:
                 Spacer()
             case .single:
-                Text(viewModel.content)
+                Text(viewModel.content.first ?? "")
                     .font(Font.muyaoFont())
                     .padding(.horizontal, 20)
             case .double:
                 VStack {
-                    Text(addTextLimit(index: 0))
+                    Text(viewModel.content.first ?? "")
                         .font(Font.muyaoFont())
                         .multilineTextAlignment(.center)
                         .offset(x: -30, y: -40)
                         .rotationEffect(Angle(degrees: -4))
-                    Text(addTextLimit(index: 1))
+                    Text(viewModel.content.last ?? "")
                         .font(Font.muyaoFont())
                         .offset(x: 30, y: 40)
                         .rotationEffect(Angle(degrees: 4))
                 }
             }
         }
-    }
-
-    private func addTextLimit(index: Int) -> String {
-        let content = String(viewModel.content.split(separator: "，")[index])
-        guard content.count > 8 else {
-            return content
-        }
-        var value = content
-        let index = value.index(value.startIndex, offsetBy: 8)
-        value.insert("\r", at: index)
-        return value
     }
 }
 
