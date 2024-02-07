@@ -50,7 +50,6 @@ class HomeViewModel: ObservableObject {
                 self?.content = content.split(separator: "，")
                     .map { [weak self] value in self?.addTextLimitInDoubleBubble(content: String(value)) ?? "" }
                     .map { [weak self] value in self?.colorizeDigitsAndLetters(content: value) ?? "" }
-                
             }
             .store(in: &cancellables)
     }
@@ -95,7 +94,7 @@ class HomeViewModel: ObservableObject {
             bubbleStyle = content.contains("，") ? .double : .single
         }
     }
-    
+
     private func addTextLimitInDoubleBubble(content: String) -> String {
         guard bubbleStyle == .double, content.count > 8 else {
             return content
@@ -105,21 +104,21 @@ class HomeViewModel: ObservableObject {
         value.insert("\n", at: index)
         return value
     }
-    
+
     private func colorizeDigitsAndLetters(content: String) -> AttributedString {
         let attributedString = NSMutableAttributedString(string: content)
         let fullRange = NSRange(location: 0, length: content.count)
         let redColor = UIColor.red
-            let redAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor: redColor]
+        let redAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor: redColor]
         do {
-                let regex = try NSRegularExpression(pattern: "[0-9a-zA-Z]", options: [])
-                let matches = regex.matches(in: content, options: [], range: fullRange)
-                for match in matches {
-                    attributedString.addAttributes(redAttributes, range: match.range)
-                }
-            } catch {
-                return AttributedString(attributedString)
+            let regex = try NSRegularExpression(pattern: "[0-9a-zA-Z]", options: [])
+            let matches = regex.matches(in: content, options: [], range: fullRange)
+            for match in matches {
+                attributedString.addAttributes(redAttributes, range: match.range)
             }
+        } catch {
+            return AttributedString(attributedString)
+        }
         return AttributedString(attributedString)
     }
 }

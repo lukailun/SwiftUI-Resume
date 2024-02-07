@@ -84,9 +84,22 @@ extension HomeView {
                     .resizable()
                     .scaleEffect(1.25, anchor: .top)
                     .scaledToFit()
+                    .overlay {
+                        if !viewModel.isNextEnabled {
+                            Text(getYear())
+                                .foregroundColor(.white)
+                                .font(Font.system(size: 80).bold())
+                        }
+                    }
             }
             Spacer()
         }
+    }
+
+    private func getYear() -> String {
+        let currentDate = Date()
+        let currentYear = Calendar.current.component(.year, from: currentDate)
+        return String(currentYear).map { String($0) }.joined(separator: "\n")
     }
 }
 
