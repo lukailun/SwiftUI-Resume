@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 
+@MainActor
 class ResumeAppViewModel: ObservableObject {
     @Published var isLaunching = true
 
