@@ -43,15 +43,15 @@ struct HomeView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        ToolbarButton(imageName: "toolbar/arrow_clockwise") {
+                        ToolbarButton(imageName: "toolbar/clockwise") {
                             viewModel.reset()
                         }
                         Spacer().frame(width: 20)
-                        ToolbarButton(imageName: "toolbar/caret_left", enabled: viewModel.isPreviousEnabled) {
+                        ToolbarButton(imageName: "toolbar/left", enabled: viewModel.isPreviousEnabled) {
                             viewModel.previous()
                         }
                         Spacer().frame(width: 20)
-                        ToolbarButton(imageName: "toolbar/caret_right", enabled: viewModel.isNextEnabled) {
+                        ToolbarButton(imageName: "toolbar/right", enabled: viewModel.isNextEnabled) {
                             viewModel.next()
                         }
                         Spacer().frame(width: 20)
